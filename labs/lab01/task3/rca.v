@@ -10,6 +10,9 @@
 // TODO: instantiate four FA_Gate instances, same chaining pattern as
 // Task 2 (FA0..FA3, carry chain c1,c2,c3).
 
+// rca.v
+// 4-bit Ripple Carry Adder using four FA_Gate instances
+
 module rca(
     input [3:0] a,
     input [3:0] b,
