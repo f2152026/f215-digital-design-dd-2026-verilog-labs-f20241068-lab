@@ -4,11 +4,11 @@ module ripple_adder(
 
   input  [3:0] b,
 
-  input        cin,
+  input cin,
 
   output [3:0] sum,
 
-  output       cout
+  output cout
 
 );
 
@@ -49,5 +49,6 @@ module ripple_adder(
     .sum(sum[3]),
     .cout(cout)
   );
+
 
 endmodule
