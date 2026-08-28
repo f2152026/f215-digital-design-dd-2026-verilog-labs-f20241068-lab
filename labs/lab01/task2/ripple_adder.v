@@ -24,6 +24,8 @@ module ripple_adder(
   );
 
 
+
+
   FA_Gate FA1 (
     .a(a[1]),
     .b(b[1]),
