@@ -13,27 +13,45 @@
 // and re-test before submitting.
 
 module alu (
-  input      [3:0] a,
-  input      [3:0] b,
-  input             op,      // 0 = add, 1 = sub
-  output reg [3:0] result
+    input  [3:0] a,
+    input  [3:0] b,
+    input        op,       // 0 = add, 1 = sub
+    output reg [3:0] result
 );
 
-  reg [3:0] b_inv;
-  reg [3:0] b_twos;
+    reg [3:0] b_inv;
+    reg [3:0] b_twos;
 
-  always @(a, b) begin
-    case (op)
-      1'b0: begin
-        result = a + b;                 // add
-      end
-      1'b1: begin
-        b_inv  <= ~b;                   // sub, via two's complement
-        b_twos <= b_inv + 1;
-        result <= a + b_twos;
-      end
-    endcase
-  end
+    // FIX 1:
+    // Use always @(*) so the block responds to changes
+    // in a, b, AND op.
+    always @(*) begin
+
+        case (op)
+
+            // Addition
+            1'b0: begin
+                result = a + b;
+            end
+
+            // Subtraction
+            // a - b = a + (~b + 1)
+            1'b1: begin
+                // FIX 2:
+                // Use blocking assignments (=) so each statement
+                // updates immediately before the next statement.
+                b_inv  = ~b;
+                b_twos = b_inv + 1;
+                result = a + b_twos;
+            end
+
+            // Default case
+            default: begin
+                result = 4'b0000;
+            end
+
+        endcase
+
+    end
 
 endmodule
-
